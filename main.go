@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"github.com/joho/godotenv"
+	"os"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -11,7 +13,14 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	fmt.Println("Golang - Server listens at port 8000")
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error when get env")
+	}
+
+	port := os.Getenv("PORT")
+
+	fmt.Println("Golang - Server listens at port " + port)
 	http.HandleFunc("/", handler)
-	log.Fatal(http.ListenAndServe(":8000", nil))
+	log.Fatal(http.ListenAndServe(":" + port, nil))
 }
