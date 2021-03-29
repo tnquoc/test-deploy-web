@@ -15,10 +15,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error when get env")
+		log.Fatal("Error when get PORT from env")
 	}
-
+	
 	port := os.Getenv("PORT")
+	if port == "" {
+		port = "9000"
+	}
 
 	fmt.Println("Golang - Server listens at port " + port)
 	http.HandleFunc("/", handler)
