@@ -11,7 +11,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	fmt.Println("Server listens at port 8000")
+	fmt.Println("Golang - Server listens at port 8000")
 	http.HandleFunc("/", handler)
 	log.Fatal(http.ListenAndServe(":8000", nil))
 }
